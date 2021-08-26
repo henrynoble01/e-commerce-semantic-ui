@@ -1,12 +1,6 @@
 import React from "react";
-import {
-  Card,
-  CardMedia,
-  CardContent,
-  CardActions,
-  Typography,
-  IconButton,
-} from "@material-ui/core";
+
+import { Card, Icon, Image, Header } from "semantic-ui-react";
 
 import useStyles from "./styles";
 
@@ -14,36 +8,31 @@ const Product = ({ product, onAddtoCart }) => {
   const classes = useStyles();
   //   console.log(product);
 
-  //   return <div>test</div>;
   return (
     <Card className={classes.root}>
-      <CardMedia
+      <Image
         className={classes.media}
-        image={product.media.source}
+        src={product.media.source}
         title={product.name}
       />
-      <CardContent>
+      <Card.Content>
         <div className={classes.CardContent}>
-          <Typography variant='h5' gutterBottom>
-            {product.name}
-          </Typography>
-          <Typography variant='h5' gutterBottom>
-            {product.price.formatted_with_symbol}
-          </Typography>
+          <Header as='h5'>{product.name}</Header>
+          <Header as='h5'>{product.price.formatted_with_symbol}</Header>
         </div>
-        <Typography
+        <span
           dangerouslySetInnerHTML={{ __html: product.description }}
-          variant='body2'
-          color='textSecondary'
-        />
-      </CardContent>
-      <CardActions disableSpacing className={classes.CardActions}>
-        <IconButton
+          size='tiny'
+          color='grey'></span>
+      </Card.Content>
+      <Card.Content extra className={classes.CardActions}>
+        <Icon
+          name='add to cart'
           aria-label='Add to cart'
-          onClick={() => onAddtoCart(product.id, 1)}>
-          <span>add</span>
-        </IconButton>
-      </CardActions>
+          size='large'
+          onClick={() => onAddtoCart(product.id, 1)}
+        />
+      </Card.Content>
     </Card>
   );
 };
