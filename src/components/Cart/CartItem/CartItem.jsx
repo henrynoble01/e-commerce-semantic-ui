@@ -1,54 +1,56 @@
 import React from "react";
-import {
-  Typography,
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  CardMedia,
-} from "@material-ui/core";
+// import {
+//   Typography,
+//   Button,
+//   Card,
+//   CardActions,
+//   CardContent,
+//   CardMedia,
+// } from "@material-ui/core";
+
+import { Card, Image, Header, Button } from "semantic-ui-react";
 import useStyles from "./styles";
 
 const CartItem = ({ item, onUpdateCartQty, onRemoveFromCart }) => {
   //   console.log(item);
   const classes = useStyles();
   return (
-    <Card>
-      <CardMedia
-        image={item.media.source}
+    <Card style={{ width: "100%" }}>
+      <Image
+        src={item.media.source}
         alt={item.name}
         className={classes.media}
       />
-      <CardContent className={classes.carcContent}>
-        <Typography variant='h4'>{item.name}</Typography>
-        <Typography variant='h4'>
-          {item.line_total.formatted_with_symbol}
-        </Typography>
-      </CardContent>
-      <CardActions className={classes.CardActions}>
+      <Card.Content className={classes.carcContent}>
+        <Header as='h4'>{item.name}</Header>
+        <Header as='h4'>{item.line_total.formatted_with_symbol}</Header>
+      </Card.Content>
+      <Card.Content className={classes.cartActions}>
         <div className={classes.buttons}>
           <Button
             type='button'
             size='small'
-            onClick={() => onUpdateCartQty(item.id, item.quantity - 1)}>
+            onClick={() => onUpdateCartQty(item.id, item.quantity - 1)}
+            basic>
             -
           </Button>
-          <Typography>{item.quantity}</Typography>
+          <Header>{item.quantity}</Header>
           <Button
             type='button'
             size='small'
-            onClick={() => onUpdateCartQty(item.id, item.quantity + 1)}>
+            onClick={() => onUpdateCartQty(item.id, item.quantity + 1)}
+            basic>
             +
           </Button>
         </div>
         <Button
-          variant='contained'
+          compact
           type='button'
-          color='secondary'
-          onClick={() => onRemoveFromCart(item.id)}>
+          onClick={() => onRemoveFromCart(item.id)}
+          negative>
           Remove
         </Button>
-      </CardActions>
+      </Card.Content>
     </Card>
   );
 };
