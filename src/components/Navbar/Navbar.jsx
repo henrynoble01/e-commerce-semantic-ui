@@ -1,13 +1,15 @@
 import React from "react";
-import {
-  AppBar,
-  Toolbar,
-  IconButton,
-  Badge,
-  Menu,
-  MenuItem,
-  Typography,
-} from "@material-ui/core";
+// import {
+//   AppBar,
+//   Toolbar,
+//   IconButton,
+//   Badge,
+//   Menu,
+//   MenuItem,
+//   Typography,
+// } from "@material-ui/core";
+
+import { Menu, Image, Icon, Header, Label } from "semantic-ui-react";
 
 import { Link, useLocation } from "react-router-dom";
 
@@ -18,38 +20,34 @@ const Navbar = ({ totalItems }) => {
   const location = useLocation();
   return (
     <>
-      <AppBar position='fixed' className={classes.appbar} color='inherit'>
-        <Toolbar>
-          <Typography
-            component={Link}
-            to='/'
-            variant='h6'
-            className={classes.title}
-            color='inherit'>
-            <img
-              src='https://i.ibb.co/Qp1SXBw/commerce.png'
-              alt='commerce.js'
-              height='25px'
-              className={classes.image}
-            />
-            commerce.js
-          </Typography>
-          <div className={classes.grow} />
-          {location.pathname === "/" && (
-            <div className={classes.button}>
-              <IconButton
-                component={Link}
-                to='/cart'
-                aria-label='show cart items'
-                color='inherit'>
-                <Badge badgeContent={totalItems} color='secondary'>
-                  <span>Cart</span>
-                </Badge>
-              </IconButton>
-            </div>
-          )}
-        </Toolbar>
-      </AppBar>
+      <Menu fixed='top' className={classes.appbar}>
+        {/* <Toolbar> */}
+        <Header as={Link} to='/' size='medium' className={classes.title}>
+          <Image
+            src='https://i.ibb.co/Qp1SXBw/commerce.png'
+            alt='commerce.js'
+            height='25px'
+            className={classes.image}
+          />
+          commerce.js
+        </Header>
+
+        <Menu.Menu position='right' className={classes.grow} />
+        {location.pathname === "/" && (
+          <Menu.Item as={Link} to='/cart' name='shoppingcart'>
+            <Icon size='large' color='grey' name='shopping cart' />
+            <Label
+              color='red'
+              circular
+              floating
+              style={{ top: 0, left: "90%" }}>
+              {totalItems}
+            </Label>
+          </Menu.Item>
+        )}
+        {/* </Menu.Menu> */}
+        {/* </Toolbar> */}
+      </Menu>
     </>
   );
 };
