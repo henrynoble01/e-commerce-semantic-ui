@@ -1,31 +1,35 @@
 import React from "react";
-import { Typography, List, ListItem, ListItemText } from "@material-ui/core";
+// import { Typography, List, ListItem, ListItemText } from "@material-ui/core";
+import { Header, List } from "semantic-ui-react";
 
 const Review = ({ checkoutToken }) => {
   console.log(checkoutToken);
   return (
     <>
-      <Typography variant='h6' gutterBottom>
-        Order Summary
-      </Typography>
+      <Header as='h5'>Order Summary</Header>
       <List disablePadding>
         {checkoutToken.live.line_items.map((product) => (
-          <ListItem style={{ padding: "10px 0" }} key={product.name}>
-            <ListItemText
-              primary={product.name}
-              secondary={`Quantity: ${product.quantity}`}
-            />
-            <Typography variant='body2'>
-              {product.line_total.formatted_with_symbol}
-            </Typography>
-          </ListItem>
+          <List.Item style={{ padding: "10px 0" }} key={product.name}>
+            <List.Content>
+              <List.Header content={product.name}></List.Header>
+              <List.Description
+                content={`Quantity: ${product.quantity}`}></List.Description>
+            </List.Content>
+            <List.Content floated='right'>
+              <Header size='tiny'>
+                {product.line_total.formatted_with_symbol}
+              </Header>
+            </List.Content>
+          </List.Item>
         ))}
-        <ListItem style={{ padding: "10px 0" }}>
-          <ListItemText primary='Total' />
-          <Typography variant='subtitle1' style={{ fontWeight: 700 }}>
-            {checkoutToken.live.subtotal.formatted_with_symbol}
-          </Typography>
-        </ListItem>
+        <List.Item style={{ padding: "10px 0" }}>
+          <List.Header content='Total' />
+          <List.Content floated='right'>
+            <Header size='small' style={{ fontWeight: 700 }}>
+              {checkoutToken.live.subtotal.formatted_with_symbol}
+            </Header>
+          </List.Content>
+        </List.Item>
       </List>
     </>
   );

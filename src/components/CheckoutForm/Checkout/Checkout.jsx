@@ -77,7 +77,7 @@ const Checkout = ({ cart, order, onCaptureCheckout, error }) => {
         setCheckoutToken(token);
       } catch (error) {
         // eslint-disable-next-line no-restricted-globals
-        history.pushState("/");
+        // history.pushState("/");
       }
     };
 

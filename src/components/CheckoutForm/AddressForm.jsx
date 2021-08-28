@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-import {
-  InputLabel,
-  Select,
-  MenuItem,
-  Button,
-  Grid,
-  Typography,
-} from "@material-ui/core";
+// import {
+//   InputLabel,
+//   Select,
+//   MenuItem,
+//   Button,
+//   Grid,
+//   Typography,
+// } from "@material-ui/core";
+
+import { Button, Grid, Form, Header } from "semantic-ui-react";
+
 import { useForm, FormProvider } from "react-hook-form";
 import FormInput from "./CustomTextField";
 import { commerce } from "../../lib/commerce";
@@ -87,11 +90,9 @@ const AddressForm = ({ checkoutToken, next }) => {
 
   return (
     <>
-      <Typography variant='h6' gutterBottom>
-        Shipping Address
-      </Typography>
+      <Header as='h4'>Shipping Address</Header>
       <FormProvider {...methods}>
-        <form
+        <Form
           onSubmit={methods.handleSubmit((data) => {
             console.log({ ...data });
             next({
@@ -101,7 +102,7 @@ const AddressForm = ({ checkoutToken, next }) => {
               shippingOptions,
             });
           })}>
-          <Grid container spacing={3}>
+          <Grid container stackable>
             <FormInput name='firstName' label='First name' />
             <FormInput name='lastName' label='Last name' />
             <FormInput name='address1' label='Address' />
@@ -109,59 +110,59 @@ const AddressForm = ({ checkoutToken, next }) => {
             <FormInput name='city' label='City' />
             <FormInput name='zip' label='ZIP / Postal code' />
 
-            <Grid item xs={12} sm={6}>
-              <InputLabel>Shipping Country</InputLabel>
-              <Select
+            <Grid.Column mobile={16} tablet={8} computer={8}>
+              <label>Shipping Country</label>
+              <Form.Field
                 value={shippingCountry}
-                fullWidth
+                control='select'
                 onChange={(e) => {
                   setShippingCountry(e.target.value);
                   console.log(e.target.value);
                 }}>
                 {countries.map((country) => (
-                  <MenuItem key={country.id} value={country.id}>
+                  <option key={country.id} value={country.id}>
                     {country.label}
-                  </MenuItem>
+                  </option>
                 ))}
-              </Select>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <InputLabel>Shipping SubDivision</InputLabel>
-              <Select
+              </Form.Field>
+            </Grid.Column>
+            <Grid.Column mobile={12} tablet={8} computer={8}>
+              <label>Shipping SubDivision</label>
+              <Form.Field
                 value={shippingSubdivision}
-                fullWidth
+                control='select'
                 onChange={(e) => setShippingSubdivision(e.target.value)}>
                 {subdivisions.map((subdivision) => (
-                  <MenuItem key={subdivision.id} value={subdivision.id}>
+                  <option key={subdivision.id} value={subdivision.id}>
                     {subdivision.label}
-                  </MenuItem>
+                  </option>
                 ))}
-              </Select>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <InputLabel>Shipping Options</InputLabel>
-              <Select
+              </Form.Field>
+            </Grid.Column>
+            <Grid.Column mobile={12} tablet={8} computer={8}>
+              <label>Shipping Options</label>
+              <Form.Field
                 value={shippingOption}
-                fullWidth
+                control='select'
                 onChange={(e) => setShippingOption(e.target.value)}>
                 {options.map((option) => (
-                  <MenuItem key={option.id} value={option.id}>
+                  <option key={option.id} value={option.id}>
                     {option.label}
-                  </MenuItem>
+                  </option>
                 ))}
-              </Select>
-            </Grid>
+              </Form.Field>
+            </Grid.Column>
           </Grid>
           <br />
           <div style={{ display: "flex", justifyContent: "space-between" }}>
-            <Button component={Link} to='/cart' variant='outlined'>
+            <Button as={Link} to='/cart'>
               Back to cart
             </Button>
-            <Button type='submit' variant='contained' color='primary'>
+            <Button type='submit' primary>
               Next
             </Button>
           </div>
-        </form>
+        </Form>
       </FormProvider>
     </>
   );
