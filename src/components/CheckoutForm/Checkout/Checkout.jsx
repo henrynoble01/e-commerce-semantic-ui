@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
   Paper,
   Stepper,
   Step,
   StepLabel,
   Typography,
-  CircularProgress,
   Divider,
   Button,
 } from "@material-ui/core";
@@ -21,7 +20,6 @@ const Checkout = ({ cart, order, onCaptureCheckout, error }) => {
   const [activeStep, setActiveStep] = useState(0);
   const [checkoutToken, setCheckoutToken] = useState(null);
   const [shippingData, setShippingData] = useState({});
-  const history = useHistory();
   const classes = useStyles();
 
   //   let Confirmation = () =>

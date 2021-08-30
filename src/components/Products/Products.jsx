@@ -1,18 +1,18 @@
 import React from "react";
 // import { Grid } from "@material-ui/core";
-import { Container, Grid } from "semantic-ui-react";
-import { createMedia } from "@artsy/fresnel";
+import { Grid } from "semantic-ui-react";
+// import { createMedia } from "@artsy/fresnel";
 import Product from "./Product/Product";
 import useStyles from "./styles";
 
-const { MediaContextProvider, Media } = createMedia({
-  breakpoints: {
-    sm: 0,
-    md: 768,
-    lg: 1024,
-    xl: 1192,
-  },
-});
+// const { MediaContextProvider, Media } = createMedia({
+//   breakpoints: {
+//     sm: 0,
+//     md: 768,
+//     lg: 1024,
+//     xl: 1192,
+//   },
+// });
 
 // const products = [
 //   { id: 1, name: "John", description: "John", price: "$100" },
